@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+   <div class="box">
+       <div class="wave -one"></div>
+       <div class="wave -two"></div>
+       <div class="wave -three"></div>
+
+       <div class="sun"id="weathercon"><i class="fa fa-sun-o fa-5x" style="color:#eccc68"></i></div>
+       <div class="info">
+           <h2 class="location">
+              <i class="fa fa-street-view" style="color:white">{%locations%},{%country%}</i> 
+           </h2>
+           <p id="date">WED | OCT | 10.49AM </p>
+           <h1 class="temp">{%tempval%}</h1>
+           <h3 class="tempmin_max">Min {%tempmin%} | Max{%tempmax%} C</h3>
+       </div>
+   </div>
+</body>
+<script>
+    const curDate = document.querySelector('#date');
+    let weathercon = document.querySelector('#weathercon')
+
+    const tempState  = "Clouds";
+   
+    const getCurrentDate = () =>{
+        var weekday = new Array(7);
+        weekday[0]= "Sun";
+        weekday[1]= "Mon";
+        weekday[2]= "Tues";
+        weekday[3]= "Wed";
+        weekday[4]= "Thurs";
+        weekday[5]= "Fri";
+        weekday[6]= "Sat";
+        let currentTime = new Date();
+        let day = weekday[currentTime.getDay()];
+        return day;
+    };
+    const getCurrentTime = ()=>{
+        var months = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"];
+        var now = new Date();
+        var month = months[now.getMonth()];
+        var date = now.getDate();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        let perios = "AM";
+        if(hours > 11){
+            perios = "PM";
+            if(hours > 12)hours -=12;
+        }
+        if(minutes<10){
+            minutes = "0"+minutes
+        }
+        var year = now.getFullYear();
+        return `${month}${date} | ${hours}:${minutes}${perios}`;
+      
+    };
+   curDate.innerHTML =  getCurrentDate() + " | "+getCurrentTime();
+
+</script>
+</html>
